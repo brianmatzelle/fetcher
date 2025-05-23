@@ -17,7 +17,8 @@ WORKDIR /home/user
 # Install Node.js via fnm for the user
 RUN curl -fsSL https://fnm.vercel.app/install | bash && \
     echo 'eval "$(fnm env --use-on-cd)"' >> /home/user/.bashrc && \
-    . /home/user/.bashrc && \
+    export PATH="/home/user/.local/share/fnm:$PATH" && \
+    eval "`fnm env`" && \
     fnm install 22 && \
     fnm default 22 && \
     npm install -g @anthropic-ai/claude-code
